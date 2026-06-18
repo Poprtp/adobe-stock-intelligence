@@ -1,0 +1,13 @@
+Opportunity ID,Asset ID,Buyer ID,Use Case ID,Niche,Notes
+O001,A001,B006,U004,Healthcare Product Launch,"OTC/supplement launch environment."
+O002,A002,B006,U002,Pharmacy Product Display,"Packaging presentation in realistic pharmacy context."
+O003,A002,B005,U001,Empty Pharmacy Shelf,"Healthcare website hero with high copy space."
+O004,A004,B007,U002,Pet Food Packaging Display,"Premium pet packaging presentation."
+O005,A005,B007,U006,Pet Feeding Station,"Lifestyle social/web asset for pet brands."
+O006,A006,B010,U009,Frozen Food Freezer Display,"Retail pitch and POS mockup use."
+O007,A007,B009,U002,Coffee Pouch Retail Shelf,"Coffee pouch presentation environment."
+O008,A008,B001,U002,Retail Packaging Display Shelf,"Broad FMCG packaging scene."
+O009,A009,B011,U001,Industrial Workbench,"B2B website hero and sales material."
+O010,A010,B012,U003,Clean Warehouse Environment,"Logistics deck and website background."
+O011,A003,B005,U008,Wellness Clinic Reception,"Trusted healthcare brochure asset."
+O012,A011,B005,U001,Dental Clinic Marketing Scene,"Dental/medical web marketing scene."

@@ -1,0 +1,11 @@
+Use Case ID,Use Case,Primary Buyers,Commercial Value (1-10),Repeat Use (1-10),Evergreen (1-10),Asset Requirements,Notes
+U001,Website Hero,"Brand Manager; Healthcare Marketing Manager; Shopify Store Owner",10,9,10,"Wide aspect ratio; clear copy space; premium composition","Highest-value generic use case."
+U002,Packaging Presentation,"Packaging Designer; Brand Manager; Coffee Roaster; Pet Brand Owner",10,10,10,"Product placement area; realistic retail or launch context","Core strategic use case."
+U003,Sales Deck,"Brand Manager; Sales Team; Pharmaceutical Brand Manager",9,10,10,"Clean layout; professional; trustworthy; reusable","Very repeatable for internal and B2B buyers."
+U004,Product Launch,"Brand Manager; Pharmaceutical Brand Manager; Pet Brand Owner",10,8,9,"Hero composition; campaign-ready lighting; premium mood","High commercial intent."
+U005,Trade Show Booth,"Pharmaceutical Brand Manager; Manufacturing Marketing Manager",8,7,8,"Large clean background; professional environment","Useful for B2B industries."
+U006,Social Media Ads,"Marketing Manager; Pet Brand Owner; Shopify Store Owner",8,8,8,"Vertical and square crops; eye-catching thumbnail","Good volume but more trend-sensitive."
+U007,Amazon A+ Content,"Amazon Seller; E-commerce Manager",9,9,8,"Product-friendly, clear benefit zones, clean space","High conversion-driven use."
+U008,Brochure,"Healthcare Marketing Manager; Hospital; Clinic",8,8,10,"Trustworthy, editorial, copy space","Evergreen print/digital use case."
+U009,Retail Pitch,"FMCG Brand; Coffee Roaster; Pet Brand Owner; Frozen Food Brand",10,8,9,"Shelf, freezer, endcap, or display context","Strong fit for packaging/retail assets."
+U010,LinkedIn B2B Campaign,"Manufacturing; Logistics; Healthcare; SaaS",7,8,8,"Professional environment; credible, non-generic","Secondary but repeatable."

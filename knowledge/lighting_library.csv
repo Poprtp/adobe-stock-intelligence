@@ -1,0 +1,11 @@
+lighting_id,lighting_name,lighting_description,best_for
+L001,Soft commercial daylight,"large diffused daylight from one side with gentle shadows, realistic highlights, and clean neutral color","website hero; product marketing"
+L002,Bright retail illumination,"even overhead retail lighting with controlled reflections, visible product zones, and realistic shelf depth","retail shelf; packaging display"
+L003,Premium studio retail blend,"softbox key light mixed with practical environmental lighting for polished commercial realism","campaign key visual; launch"
+L004,Cool clinical clarity,"bright cool-white healthcare lighting with subtle warmth, no harsh glare, and calm cleanliness","pharmacy; healthcare"
+L005,Warm natural lifestyle light,"warm window light with neutral fill, soft shadows, and approachable premium atmosphere","pet; coffee; lifestyle"
+L006,Controlled industrial light,"overhead industrial fixtures balanced with soft fill, realistic shadows, and crisp material edges","manufacturing; logistics"
+L007,Low contrast corporate light,"clean corporate interior lighting with balanced contrast, polished surfaces, and calm trustworthy mood","finance; B2B"
+L008,Cool technology glow,"subtle cool ambient light with realistic rack reflections, no sci-fi exaggeration, and deep but clean shadows","technology; SaaS"
+L009,Freezer case realism,"cool internal case lighting with soft exterior fill, mild condensation glow, and readable shelf structure","frozen food"
+L010,Editorial product daylight,"natural daylight with refined shadow shape, premium texture detail, and uncluttered marketing finish","ecommerce; social ads"

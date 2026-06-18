@@ -1,0 +1,13 @@
+camera_id,camera_name,camera_instruction
+C001,Eye-level commercial hero,"eye-level full-frame camera, 35mm lens, straight verticals, crisp detail, realistic depth"
+C002,Three-quarter retail view,"slight three-quarter angle, 40mm lens, organized shelf depth, foreground-to-background clarity"
+C003,Wide website banner,"wide 28mm lens, horizontal hero framing, generous negative space, clean perspective"
+C004,Vertical social crop,"vertical 50mm product-marketing crop, compressed depth, strong central product zone"
+C005,Architectural interior view,"24mm tilt-corrected architectural view, straight lines, calm spatial depth"
+C006,Close retail detail,"70mm detail view, controlled background separation, tactile materials, product-ready foreground"
+C007,Overhead planning angle,"soft overhead 45-degree camera, practical surface detail, organized commercial layout"
+C008,Low counter-level hero,"low counter-height angle, premium product placement area, subtle background depth"
+C009,Symmetrical aisle view,"centered symmetrical view, balanced shelves or counters, clear vanishing lines"
+C010,Presentation deck frame,"medium-wide 35mm frame, readable object hierarchy, clean room for slide copy"
+C011,Macro material accent,"85mm close perspective, material texture emphasis, soft falloff, still commercially broad"
+C012,Open foreground frame,"wide frame with open foreground, asset anchor to one side, clear overlay area"

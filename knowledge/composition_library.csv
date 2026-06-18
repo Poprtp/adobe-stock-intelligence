@@ -1,0 +1,13 @@
+composition_id,composition_name,composition_instruction
+K001,Left anchor with right copy space,"main commercial environment anchored on the left third with clean right-side negative space"
+K002,Right anchor with left copy space,"main asset area anchored on the right third with uncluttered left-side copy space"
+K003,Central product zone,"clear central empty product placement zone with supporting context arranged around it"
+K004,Lower-third placement,"foreground lower third reserved for packaging, product mockup, or campaign object"
+K005,Top header space,"upper third left clean for headline overlay while scene detail stays below"
+K006,Diagonal shelf rhythm,"subtle diagonal shelf or counter rhythm that leads the eye toward the product area"
+K007,Symmetrical premium layout,"balanced symmetrical composition with calm spacing and professional stock usability"
+K008,Layered depth layout,"foreground, midground, and background layers separated clearly without clutter"
+K009,Editorial negative space,"large quiet negative space with a single strong commercial focal point"
+K010,Modular campaign grid,"organized modular zones suitable for campaign variants and repeated asset production"
+K011,Wide panoramic sweep,"wide horizontal sweep with strong environmental context and open overlay area"
+K012,Tight social focal area,"compact vertical composition with strong focal area and clean margins for cropping"

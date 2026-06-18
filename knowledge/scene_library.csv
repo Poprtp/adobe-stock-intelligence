@@ -1,0 +1,11 @@
+scene_id,scene_name,scene_description,best_for
+S001,Premium retail shelf bay,"organized retail shelf environment with clean empty product facings, neutral shelf rails, realistic spacing, and no readable labels","packaging presentation; retail display"
+S002,Modern pharmacy counter,"clean healthcare retail counter with soft clinical cues, modular shelving, neutral packaging blocks, and calm professional atmosphere","healthcare marketing; pharmacy products"
+S003,Chilled freezer aisle,"frozen food display environment with glass doors, soft condensation, cool shelving, and empty packaging-ready zones","frozen food; retail launch"
+S004,Pet specialty store display,"warm pet retail aisle with premium shelf materials, neat product zones, lifestyle cues, and uncluttered background","pet products; ecommerce"
+S005,Coffee roastery retail wall,"premium coffee shelf and counter scene with matte pouches, warm wood, subtle equipment cues, and copy space","coffee packaging; launch campaigns"
+S006,Industrial workbench environment,"clean manufacturing workbench with organized tools, durable surfaces, safety cues, and professional B2B atmosphere","manufacturing; capability decks"
+S007,Bank service interior,"modern financial service counter with glass, stone, secure details, and calm trustworthy spacing","finance; fintech marketing"
+S008,Warehouse loading dock,"logistics interior with dock doors, clean concrete, pallet-ready space, and controlled industrial depth","logistics; sales decks"
+S009,Construction site office,"temporary project office interior with plan table, neutral materials, and clean management-focused context","construction; software marketing"
+S010,Server infrastructure room,"quiet data center room with organized racks, empty foreground, cool lighting, and no brand details","technology; SaaS hero"
