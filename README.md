@@ -55,6 +55,10 @@ Knowledge inputs:
 - `knowledge/use_cases.csv`
 - `knowledge/assets.csv`
 - `knowledge/opportunities.csv`
+- `knowledge/opportunity_database.csv`
+- `knowledge/buyer_database.csv`
+- `knowledge/use_case_database.csv`
+- `knowledge/market_score.csv`
 - `knowledge/asset_dna.csv`
 - `knowledge/scene_dna.csv`
 - `knowledge/material_dna.csv`
@@ -66,6 +70,7 @@ Knowledge inputs:
 Generated outputs:
 
 - `output/opportunity_ranking.xlsx`
+- `output/opportunity_ranking.md`
 - `output/summary_report.md`
 - `output/knowledge_ranking.xlsx`
 - `output/knowledge_summary.md`
@@ -103,6 +108,42 @@ Buyer -> Use Case -> Asset -> Opportunity
 
 This layer helps recommend what asset collection to build next, not just which
 keyword to score.
+
+## Opportunity Intelligence Engine
+
+Milestone M7 ranks Adobe Stock opportunities before prompt generation and
+answers:
+
+```text
+What should we create next?
+```
+
+The engine uses local seed data only:
+
+- `knowledge/opportunity_database.csv`
+- `knowledge/buyer_database.csv`
+- `knowledge/use_case_database.csv`
+- `knowledge/market_score.csv`
+
+Each ranked opportunity includes:
+
+- Overall Score (0-100)
+- Recommended Collection
+- Primary Buyer
+- Primary Use Case
+- Score Breakdown
+- Recommendation
+- Reasoning
+
+Scoring dimensions:
+
+- Demand
+- Competition
+- Commercial Value
+- Reusability
+- Approval Risk
+- Revenue Potential
+- Seasonality
 
 ## Design Brief Generator
 

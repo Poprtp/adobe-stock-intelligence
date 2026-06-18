@@ -1,0 +1,16 @@
+use_case_id,use_case_name,channel,commercial_intent,required_copy_space,format_priority,notes
+U001,Website Hero,web,awareness and conversion,45,16:9,Needs strong copy zone
+U002,Packaging Presentation,presentation,retail pitch and launch,35,16:9,Needs product placement zone
+U003,Sales Deck,presentation,B2B sales support,40,16:9,Needs professional context
+U004,Product Launch,campaign,new product introduction,40,16:9 and 4:5,Needs premium visual direction
+U005,Retail Pitch,presentation,shelf placement and buyer sell-in,30,16:9,Needs realistic shelf structure
+U006,Social Media Ads,social,paid acquisition,25,4:5,Needs vertical crop margin
+U007,Ecommerce Banner,ecommerce,product discovery,35,16:9,Needs clean product-ready layout
+U008,Brochure,print,trust and explanation,40,4:5,Needs calm uncluttered background
+U009,Point Of Sale,campaign,in-store merchandising,25,4:5,Needs display realism
+U010,LinkedIn Campaign,social,B2B demand generation,35,1:1 and 4:5,Needs professional credibility
+U011,Trade Show Display,event,lead generation,45,16:9,Needs large clean visual zones
+U012,Investor Presentation,presentation,corporate credibility,40,16:9,Needs polished trustworthy setting
+U013,Product Listing,ecommerce,conversion support,30,4:5,Needs simple product placement
+U014,Brand Guideline Mockup,design,system presentation,35,16:9,Needs modular repeatability
+U015,Category Landing Page,web,category merchandising,45,16:9,Needs broad reusable hero image

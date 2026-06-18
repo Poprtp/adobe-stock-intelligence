@@ -1,0 +1,25 @@
+market_id,demand,competition,commercial_value,reusability,approval_risk,revenue_potential,seasonality,market_notes
+MS001,9,3,10,10,3,9,2,High-value healthcare packaging need with moderate approval care
+MS002,9,4,9,10,3,9,2,Evergreen healthcare hero visuals with strong buyer demand
+MS003,8,3,9,9,3,8,2,Pharmacy chain scenes are reusable and underrepresented
+MS004,8,4,9,9,4,8,2,Supplement retail pitch visuals have steady use
+MS005,7,4,9,8,4,8,2,Medical device marketing has high commercial value
+MS006,8,3,9,9,3,8,2,Pet packaging displays are commercially strong
+MS007,8,5,10,10,2,8,2,Broad packaging designer use across categories
+MS008,7,3,9,8,3,8,4,Frozen food has useful retail context with mild seasonality
+MS009,7,5,8,8,2,7,3,Coffee shelf scenes are evergreen but more competitive
+MS010,7,2,8,9,2,7,2,Retail end-cap displays are low supply and reusable
+MS011,7,3,8,9,3,7,2,Clean industrial workbench scenes support B2B marketing
+MS012,7,4,8,9,3,7,2,Warehouse environments are useful but moderately supplied
+MS013,8,5,9,8,4,8,2,Finance trust interiors have high value and approval sensitivity
+MS014,8,6,8,7,3,8,2,Tech infrastructure scenes are demanded but saturated
+MS015,6,2,7,8,3,6,2,Construction site office scenes are niche but low competition
+MS016,7,4,8,8,4,7,2,Dental marketing scenes have steady local business demand
+MS017,7,5,8,8,3,7,3,Restaurant kitchen scenes are useful but more common
+MS018,7,4,8,9,4,7,2,Insurance healthcare visuals need trust and safety
+MS019,8,5,8,9,2,8,2,Amazon seller backgrounds are reusable and broad
+MS020,8,4,9,10,3,9,2,B2B agency background systems have strong repeat value
+MS021,8,3,9,9,3,8,2,Healthcare retail atrium display has premium commercial angle
+MS022,7,3,8,8,3,7,2,Natural apothecary shelves are differentiated healthcare visuals
+MS023,8,4,9,9,3,8,2,Wellness pharmacy displays blend healthcare and retail demand
+MS024,7,2,8,8,3,7,2,Bank teller window scenes are low supply and credible

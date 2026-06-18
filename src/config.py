@@ -14,6 +14,7 @@ INPUT_WORKBOOK = DATA_DIR / "Adobe_Stock_Intelligence_Database_v2.xlsx"
 NICHE_SHEET_NAME = "Niche Database"
 
 OUTPUT_WORKBOOK = OUTPUT_DIR / "opportunity_ranking.xlsx"
+OPPORTUNITY_RANKING_REPORT = OUTPUT_DIR / "opportunity_ranking.md"
 SUMMARY_REPORT = OUTPUT_DIR / "summary_report.md"
 
 # Knowledge layer inputs
@@ -22,6 +23,10 @@ BUYERS_CSV = KNOWLEDGE_DIR / "buyers.csv"
 USE_CASES_CSV = KNOWLEDGE_DIR / "use_cases.csv"
 ASSETS_CSV = KNOWLEDGE_DIR / "assets.csv"
 OPPORTUNITIES_CSV = KNOWLEDGE_DIR / "opportunities.csv"
+OPPORTUNITY_DATABASE_CSV = KNOWLEDGE_DIR / "opportunity_database.csv"
+BUYER_DATABASE_CSV = KNOWLEDGE_DIR / "buyer_database.csv"
+USE_CASE_DATABASE_CSV = KNOWLEDGE_DIR / "use_case_database.csv"
+MARKET_SCORE_CSV = KNOWLEDGE_DIR / "market_score.csv"
 SCENE_LIBRARY_CSV = KNOWLEDGE_DIR / "scene_library.csv"
 MATERIAL_LIBRARY_CSV = KNOWLEDGE_DIR / "material_library.csv"
 LIGHTING_LIBRARY_CSV = KNOWLEDGE_DIR / "lighting_library.csv"

@@ -1,0 +1,21 @@
+buyer_id,buyer_name,industry,primary_goal,budget_signal,approval_sensitivity,notes
+B001,Pharmaceutical Brand Manager,Healthcare,Launch and present OTC or supplement packaging,high,high,Needs credible unbranded healthcare retail scenes
+B002,Healthcare Marketing Manager,Healthcare,Create website heroes and campaign visuals,high,high,Needs trustworthy imagery with copy space
+B003,Pharmacy Chain Marketing Manager,Healthcare,Promote pharmacy services and retail programs,medium,high,Needs brand-neutral pharmacy environments
+B004,Supplement Brand Manager,Healthcare,Pitch supplement packaging and retail shelf placement,medium,medium,Needs clean shelves with blank packaging zones
+B005,Medical Device Brand Manager,Healthcare,Support B2B sales decks and launch pages,high,high,Needs clinical product placement without claims
+B006,Pet Brand Owner,Pet,Launch pet food and accessory packaging,medium,medium,Needs premium pet retail or home contexts
+B007,Packaging Designer,FMCG,Show packaging systems in commercial retail context,medium,low,Needs adaptable product display environments
+B008,Frozen Food Brand Manager,FMCG,Pitch freezer shelf presence and POS visuals,medium,medium,Needs freezer displays with blank packs
+B009,Coffee Roaster Brand Manager,FMCG,Launch coffee packaging and ecommerce assets,medium,low,Needs warm premium shelf scenes
+B010,Retail Trade Marketing Manager,Retail,Create merchandising and planogram presentations,medium,low,Needs end-cap and shelf display visuals
+B011,Manufacturing Marketing Manager,Manufacturing,Build B2B website and capability visuals,medium,medium,Needs clean industrial settings
+B012,Logistics Sales Team,Logistics,Support sales decks and website hero sections,medium,medium,Needs warehouse and loading dock environments
+B013,Fintech Marketing Manager,Finance,Create trust-building campaign visuals,high,high,Needs banking interiors with no brands
+B014,SaaS Marketing Manager,Technology,Create infrastructure and product hero visuals,high,medium,Needs generic tech environments
+B015,Construction Software Marketer,Construction,Support construction management landing pages,medium,medium,Needs clean jobsite office scenes
+B016,Dental Chain Marketing Manager,Healthcare,Create dental service campaign visuals,medium,high,Needs clean clinic rooms without people
+B017,Restaurant Delivery Brand Manager,Food Service,Create commercial kitchen and delivery campaign visuals,medium,medium,Needs clean food service environments
+B018,Insurance Marketing Manager,Healthcare,Support healthcare coverage brochure visuals,medium,high,Needs credible non-clinical healthcare settings
+B019,Amazon Seller,Commerce,Create product listing background assets,medium,low,Needs generic product-ready environments
+B020,B2B Agency Creative Director,B2B,Create reusable campaign background systems,high,medium,Needs broad commercial scenes for clients

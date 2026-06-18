@@ -1,0 +1,25 @@
+opportunity_id,opportunity_name,asset_name,collection_theme,buyer_id,use_case_id,market_id,recommended_collection,reasoning_seed
+OI001,Pharmacy Product Display,Pharmacy Product Display,Healthcare Retail Packaging,B001,U002,MS001,10-image pharmacy packaging display collection,High-value buyer needs credible packaging-ready pharmacy context
+OI002,Healthcare Website Hero,Healthcare Product Launch Environment,Healthcare Product Launch,B002,U001,MS002,8-image healthcare website hero collection,Evergreen healthcare marketing needs clean hero scenes
+OI003,Pharmacy Chain Campaign Hero,Pharmacy Counter Hero,Pharmacy Service Marketing,B003,U001,MS003,8-image pharmacy counter hero collection,Pharmacy chains need unbranded service visuals with copy space
+OI004,Supplement Retail Shelf Pitch,Supplement Retail Shelf,Supplement Packaging Retail,B004,U005,MS004,10-image supplement shelf pitch collection,Supplement brands need shelf-ready packaging scenes
+OI005,Medical Device Sales Deck,Clinic Product Counter,Clinical Product Placement,B005,U003,MS005,6-image clinical product counter collection,B2B sales decks benefit from clean product-ready counters
+OI006,Pet Food Packaging Display,Pet Retail Display,Pet Retail Packaging,B006,U002,MS006,10-image pet packaging display collection,Pet brands need premium display scenes without real brands
+OI007,FMCG Packaging Display Shelf,Retail Packaging Display Shelf,FMCG Packaging Presentation,B007,U002,MS007,12-image generic packaging shelf collection,Packaging designers need broad category display mockups
+OI008,Frozen Food Freezer Pitch,Frozen Food Freezer Display,Frozen Food Retail,B008,U005,MS008,8-image freezer display pitch collection,Frozen food buyers need realistic blank freezer packaging zones
+OI009,Coffee Packaging Retail Shelf,Coffee Packaging Retail Shelf,Coffee Retail Packaging,B009,U007,MS009,8-image coffee packaging ecommerce collection,Coffee brands need warm premium retail and ecommerce scenes
+OI010,Retail End-Cap Trade Marketing,Retail End-Cap Display,Retail Merchandising,B010,U005,MS010,10-image retail end-cap display collection,Trade marketers need low-supply merchandising visuals
+OI011,Industrial Workbench Website Hero,Industrial Workbench,Manufacturing B2B,B011,U001,MS011,8-image industrial workbench hero collection,Manufacturers need clean credible B2B visuals
+OI012,Warehouse Sales Deck,Clean Warehouse Environment,Logistics B2B,B012,U003,MS012,8-image warehouse sales deck collection,Logistics sales teams need professional operational scenes
+OI013,Fintech Trust Interior,Bank Teller Window,Financial Service Trust,B013,U001,MS013,6-image finance trust interior collection,Fintech buyers need credible financial interiors without brands
+OI014,SaaS Infrastructure Hero,Server Infrastructure Room,Technology Infrastructure,B014,U001,MS014,6-image SaaS infrastructure hero collection,SaaS teams need generic infrastructure visuals
+OI015,Construction Office Software Hero,Construction Site Office Trailer,Construction Software,B015,U001,MS015,6-image construction office hero collection,Construction software has low-competition office context
+OI016,Dental Clinic Campaign,Dental Clinic Marketing Scene,Dental Service Marketing,B016,U008,MS016,6-image dental clinic brochure collection,Dental chains need clean clinic scenes without patients
+OI017,Restaurant Kitchen Campaign,Restaurant Kitchen Prep Station,Food Service Marketing,B017,U006,MS017,6-image restaurant kitchen social collection,Food service brands need clean prep environments
+OI018,Healthcare Insurance Brochure,Wellness Clinic Reception,Healthcare Trust Interiors,B018,U008,MS018,8-image wellness clinic brochure collection,Insurance marketers need trustworthy non-clinical healthcare scenes
+OI019,Amazon Product Background,Retail Packaging Display Shelf,Ecommerce Product Backgrounds,B019,U013,MS019,10-image ecommerce product background collection,Sellers need reusable blank product-ready environments
+OI020,B2B Agency Campaign Background,Healthcare Retail Atrium Display,B2B Campaign Systems,B020,U014,MS020,10-image modular B2B campaign background collection,Agencies need reusable commercial background systems
+OI021,Healthcare Atrium Retail Display,Healthcare Retail Atrium Display,Premium Healthcare Retail,B002,U003,MS021,8-image healthcare atrium presentation collection,Premium healthcare scenes can support sales and brand decks
+OI022,Natural Apothecary Website Hero,Natural Apothecary Product Shelf,Natural Health Retail,B004,U001,MS022,8-image natural apothecary hero collection,Natural health brands need differentiated pharmacy-adjacent visuals
+OI023,Wellness Pharmacy Packaging Display,Wellness Pharmacy Display,Wellness Retail Packaging,B001,U002,MS023,10-image wellness pharmacy packaging collection,Wellness pharmacy scenes combine trust and warmth
+OI024,Bank Teller Window Campaign,Bank Teller Window,Financial Literacy Campaign,B013,U010,MS024,6-image bank teller campaign collection,Financial marketers need credible low-supply service interiors

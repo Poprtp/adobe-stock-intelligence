@@ -9,6 +9,7 @@ import pandas as pd
 from config import (
     ASSETS_CSV,
     ASSET_DNA_CSV,
+    BUYER_DATABASE_CSV,
     BUYERS_CSV,
     CAMERA_DNA_CSV,
     COMMERCIAL_DNA_CSV,
@@ -18,6 +19,7 @@ from config import (
     INPUT_WORKBOOK,
     KNOWLEDGE_REPORT,
     KNOWLEDGE_WORKBOOK,
+    MARKET_SCORE_CSV,
     DESIGN_BRIEFS_WORKBOOK,
     DESIGN_BRIEFS_REPORT,
     LIGHTING_DNA_CSV,
@@ -26,9 +28,12 @@ from config import (
     PROMPT_VARIATIONS_REPORT,
     SCENE_DNA_CSV,
     NICHE_SHEET_NAME,
+    OPPORTUNITY_DATABASE_CSV,
+    OPPORTUNITY_RANKING_REPORT,
     OPPORTUNITIES_CSV,
     OUTPUT_WORKBOOK,
     SUMMARY_REPORT,
+    USE_CASE_DATABASE_CSV,
     USE_CASES_CSV,
 )
 from excel_writer import write_opportunity_workbook, write_summary_report
@@ -42,6 +47,12 @@ from creative_direction_engine import (
 from commercial_prompt_engine import (
     generate_prompt_variations,
     write_prompt_variation_outputs,
+)
+from opportunity_engine import (
+    OpportunityPaths,
+    load_opportunity_inputs,
+    rank_opportunities,
+    write_opportunity_outputs,
 )
 from knowledge_engine import (
     KnowledgePaths,
@@ -69,7 +80,7 @@ def load_niche_database() -> pd.DataFrame:
         raise RuntimeError(f"Unable to read input workbook: {INPUT_WORKBOOK}") from exc
 
 
-def run_pipeline() -> tuple[int, int, int, int, int, int, int]:
+def run_pipeline() -> tuple[int, int, int, int, int, int, int, int]:
     """Run the full scoring, reporting, and knowledge-layer pipeline."""
 
     niche_data = load_niche_database()
@@ -79,6 +90,21 @@ def run_pipeline() -> tuple[int, int, int, int, int, int, int]:
 
     write_opportunity_workbook(scored_data, OUTPUT_WORKBOOK)
     write_summary_report(scored_data, SUMMARY_REPORT)
+
+    opportunity_inputs = load_opportunity_inputs(
+        OpportunityPaths(
+            opportunities=OPPORTUNITY_DATABASE_CSV,
+            buyers=BUYER_DATABASE_CSV,
+            use_cases=USE_CASE_DATABASE_CSV,
+            market_scores=MARKET_SCORE_CSV,
+        )
+    )
+    ranked_opportunities = rank_opportunities(opportunity_inputs)
+    write_opportunity_outputs(
+        ranked_opportunities,
+        OUTPUT_WORKBOOK,
+        OPPORTUNITY_RANKING_REPORT,
+    )
 
     knowledge_base = load_knowledge_base(
         KnowledgePaths(
@@ -124,6 +150,7 @@ def run_pipeline() -> tuple[int, int, int, int, int, int, int]:
         len(niche_data),
         valid_niche_rows,
         scored_niche_rows,
+        len(ranked_opportunities),
         len(ranked_assets),
         len(design_briefs),
         len(creative_directions),
@@ -137,6 +164,7 @@ def main() -> int:
             total_rows,
             valid_niche_rows,
             scored_niche_rows,
+            opportunity_rows,
             ranked_asset_rows,
             design_brief_rows,
             creative_direction_rows,
@@ -151,11 +179,12 @@ def main() -> int:
         f"total worksheet rows={total_rows}, "
         f"valid niche rows={valid_niche_rows}, "
         f"scored niche rows={scored_niche_rows}, "
+        f"opportunity rows={opportunity_rows}, "
         f"ranked asset rows={ranked_asset_rows}, "
         f"design brief rows={design_brief_rows}, "
         f"creative direction rows={creative_direction_rows}, "
         f"prompt variation rows={prompt_rows}, "
-        f"wrote {OUTPUT_WORKBOOK}, {SUMMARY_REPORT}, {KNOWLEDGE_WORKBOOK}, {KNOWLEDGE_REPORT}, {DESIGN_BRIEFS_WORKBOOK}, {DESIGN_BRIEFS_REPORT}, {CREATIVE_DIRECTIONS_WORKBOOK}, {CREATIVE_DIRECTIONS_REPORT}, {PROMPT_VARIATIONS_WORKBOOK}, and {PROMPT_VARIATIONS_REPORT}."
+        f"wrote {OUTPUT_WORKBOOK}, {OPPORTUNITY_RANKING_REPORT}, {SUMMARY_REPORT}, {KNOWLEDGE_WORKBOOK}, {KNOWLEDGE_REPORT}, {DESIGN_BRIEFS_WORKBOOK}, {DESIGN_BRIEFS_REPORT}, {CREATIVE_DIRECTIONS_WORKBOOK}, {CREATIVE_DIRECTIONS_REPORT}, {PROMPT_VARIATIONS_WORKBOOK}, and {PROMPT_VARIATIONS_REPORT}."
     )
     return 0
 
