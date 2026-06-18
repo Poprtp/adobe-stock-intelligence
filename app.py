@@ -28,9 +28,8 @@ def main() -> None:
     prompt_sections = parse_prompt_file(CURRENT_COLLECTION)
     status = load_status()
 
-    st.sidebar.title("Adobe Stock Studio")
-    room = st.sidebar.radio(
-        "Rooms",
+    st.markdown('<div class="studio-topbar">Adobe Stock Studio</div>', unsafe_allow_html=True)
+    rooms = st.tabs(
         [
             "CEO Office",
             "Strategy Room",
@@ -39,22 +38,22 @@ def main() -> None:
             "QA Room",
             "Upload Center",
             "Portfolio Room",
-        ],
+        ]
     )
 
-    if room == "CEO Office":
+    with rooms[0]:
         ceo_office(opportunities, prompt_sections, status)
-    elif room == "Strategy Room":
+    with rooms[1]:
         strategy_room(opportunities)
-    elif room == "Art Department":
+    with rooms[2]:
         art_department(creative_directions)
-    elif room == "Production Studio":
+    with rooms[3]:
         production_studio(prompt_sections, status)
-    elif room == "QA Room":
+    with rooms[4]:
         qa_room()
-    elif room == "Upload Center":
+    with rooms[5]:
         upload_center(opportunities)
-    else:
+    with rooms[6]:
         portfolio_room()
 
 
@@ -93,8 +92,8 @@ def ceo_office(opportunities: pd.DataFrame, prompts: list[dict[str, str]], statu
         )
 
     st.markdown("### Next Action")
-    st.success("Open Production Studio and generate Image 01 - Premium Contemporary Pharmacy.")
-    st.button("Go make the next image prompt", type="primary")
+    card("Open Production Studio and generate Image 01 - Premium Contemporary Pharmacy.")
+    st.button("Go make the next image prompt")
 
 
 def strategy_room(opportunities: pd.DataFrame) -> None:
@@ -163,7 +162,7 @@ def art_department(creative_directions: pd.DataFrame) -> None:
     selected_version = st.selectbox("Creative direction", current["Version"].tolist())
     row = current[current["Version"] == selected_version].iloc[0]
 
-    left, right = st.columns([2, 1])
+    left, right = st.columns([3, 1])
     with left:
         st.subheader("Creative Direction Summary")
         facts = {
@@ -216,7 +215,7 @@ def production_studio(prompts: list[dict[str, str]], status: pd.DataFrame) -> No
             STATUS_OPTIONS,
             index=STATUS_OPTIONS.index(current_status),
         )
-        if st.button("Save prompt status", type="primary"):
+        if st.button("Save prompt status"):
             save_status(status, selected, new_status)
             st.success("Prompt status saved.")
         st.markdown(f"**Intended Use:** {selected['intended_use']}")
@@ -294,7 +293,7 @@ def portfolio_room() -> None:
     cols[4].metric("Revenue", "$0")
     cols[5].metric("Best category", "Healthcare")
 
-    st.info("Portfolio tracking will be connected in a future milestone.")
+    card("Portfolio tracking will be connected in a future milestone.")
 
 
 def header(room_name: str, caption: str) -> None:
@@ -428,36 +427,89 @@ def apply_studio_style() -> None:
     st.markdown(
         """
         <style>
+        :root {
+            --studio-bg: #0f0f10;
+            --studio-surface: #171717;
+            --studio-surface-2: #1f1f1f;
+            --studio-border: #303030;
+            --studio-text: #f2f2f2;
+            --studio-muted: #a3a3a3;
+            --studio-subtle: #737373;
+        }
         .stApp {
-            background: #111316;
-            color: #f4f1ea;
+            background: var(--studio-bg);
+            color: var(--studio-text);
+            font-family: Inter, Geist, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         }
         [data-testid="stSidebar"] {
-            background: #181b20;
-            border-right: 1px solid #2b3038;
+            display: none;
         }
         h1, h2, h3 {
-            color: #f7f3ea;
+            color: var(--studio-text);
+            letter-spacing: 0;
+        }
+        .studio-topbar {
+            border-bottom: 1px solid var(--studio-border);
+            padding: 14px 0 16px 0;
+            margin-bottom: 18px;
+            color: var(--studio-text);
+            font-size: 0.95rem;
+            font-weight: 600;
+            letter-spacing: 0;
         }
         .studio-card {
-            background: #1d2229;
-            border: 1px solid #303844;
+            background: var(--studio-surface);
+            border: 1px solid var(--studio-border);
             border-radius: 8px;
             padding: 18px;
             margin: 12px 0;
-            color: #f4f1ea;
+            color: var(--studio-text);
         }
         .character-card {
-            border-left: 4px solid #d6a84f;
+            border-left: 1px solid var(--studio-border);
         }
         .character-name {
             font-size: 1.15rem;
             font-weight: 700;
         }
         .character-role {
-            color: #d6a84f;
+            color: var(--studio-muted);
             font-weight: 600;
             margin-bottom: 8px;
+        }
+        .stTabs [data-baseweb="tab-list"] {
+            gap: 4px;
+            border-bottom: 1px solid var(--studio-border);
+        }
+        .stTabs [data-baseweb="tab"] {
+            background: transparent;
+            color: var(--studio-muted);
+            border-radius: 0;
+            padding: 10px 12px;
+        }
+        .stTabs [aria-selected="true"] {
+            color: var(--studio-text);
+            border-bottom: 1px solid var(--studio-text);
+        }
+        div[data-testid="stMetric"] {
+            background: var(--studio-surface);
+            border: 1px solid var(--studio-border);
+            border-radius: 8px;
+            padding: 14px;
+        }
+        .stButton button {
+            background: var(--studio-surface-2);
+            border: 1px solid var(--studio-border);
+            color: var(--studio-text);
+            border-radius: 6px;
+        }
+        .stProgress > div > div > div > div {
+            background-color: var(--studio-muted);
+        }
+        textarea, input {
+            background: var(--studio-surface) !important;
+            color: var(--studio-text) !important;
+            border-color: var(--studio-border) !important;
         }
         </style>
         """,
