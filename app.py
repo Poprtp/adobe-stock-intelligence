@@ -1,4 +1,4 @@
-"""Local Streamlit MVP for Adobe Stock production workflow."""
+"""Office-style Streamlit workspace for Adobe Stock production."""
 
 from __future__ import annotations
 
@@ -11,165 +11,227 @@ import streamlit as st
 ROOT = Path(__file__).resolve().parent
 INTERNAL_OUTPUT = ROOT / "internal_output"
 PRODUCTION_PROMPTS = ROOT / "production" / "02_Production_Prompts"
+CURRENT_COLLECTION = PRODUCTION_PROMPTS / "Healthcare" / "Pharmacy Product Display.md"
 STATUS_CSV = ROOT / "production" / "prompt_status.csv"
 
+STATUS_OPTIONS = ["Todo", "Generated", "Selected", "Uploaded"]
 
-st.set_page_config(page_title="Adobe Stock Intelligence", layout="wide")
+
+st.set_page_config(page_title="Adobe Stock Studio", page_icon="ASI", layout="wide")
 
 
 def main() -> None:
-    st.title("Adobe Stock Intelligence")
-    st.caption("Production workspace for deciding, generating, selecting, and preparing Adobe Stock assets.")
+    apply_studio_style()
 
     opportunities = load_table(INTERNAL_OUTPUT / "opportunity_ranking.xlsx")
-    prompt_status = load_status()
-    production_files = sorted(PRODUCTION_PROMPTS.glob("*/*.md"))
+    creative_directions = load_table(INTERNAL_OUTPUT / "creative_directions.xlsx")
+    prompt_sections = parse_prompt_file(CURRENT_COLLECTION)
+    status = load_status()
 
-    screen = st.sidebar.radio(
-        "Workspace",
-        ["Dashboard", "Production Room", "Office Characters", "Audit Room"],
+    st.sidebar.title("Adobe Stock Studio")
+    room = st.sidebar.radio(
+        "Rooms",
+        [
+            "CEO Office",
+            "Strategy Room",
+            "Art Department",
+            "Production Studio",
+            "QA Room",
+            "Upload Center",
+            "Portfolio Room",
+        ],
     )
 
-    if screen == "Dashboard":
-        dashboard(opportunities, production_files)
-    elif screen == "Production Room":
-        production_room(production_files, prompt_status)
-    elif screen == "Office Characters":
-        office_characters(opportunities, production_files)
+    if room == "CEO Office":
+        ceo_office(opportunities, prompt_sections, status)
+    elif room == "Strategy Room":
+        strategy_room(opportunities)
+    elif room == "Art Department":
+        art_department(creative_directions)
+    elif room == "Production Studio":
+        production_studio(prompt_sections, status)
+    elif room == "QA Room":
+        qa_room()
+    elif room == "Upload Center":
+        upload_center(opportunities)
     else:
-        audit_room()
+        portfolio_room()
 
 
-def dashboard(opportunities: pd.DataFrame, production_files: list[Path]) -> None:
-    st.header("Dashboard")
+def ceo_office(opportunities: pd.DataFrame, prompts: list[dict[str, str]], status: pd.DataFrame) -> None:
+    header("CEO Office", "Daily overview for the next Adobe Stock production decision.")
+    top = first_row(opportunities)
+
+    character_card(
+        "Studio CEO",
+        "Daily operator",
+        "Keeps the studio focused on the next highest-value collection.",
+        f"Create the {value(top, 'Asset')} collection next." if top is not None else "Run the pipeline to refresh studio data.",
+    )
+
+    generated = status_count(status, "Generated")
+    selected = status_count(status, "Selected")
+    uploaded = status_count(status, "Uploaded")
+
+    cols = st.columns(5)
+    cols[0].metric("Top Score", int(value(top, "Overall Score", 0)))
+    cols[1].metric("Prompts Ready", len(prompts))
+    cols[2].metric("Generated", generated)
+    cols[3].metric("Selected", selected)
+    cols[4].metric("Upload-ready", uploaded)
+
+    st.markdown("### Recommended Next Collection")
+    if top is None:
+        st.warning("Run `python src/main.py` to generate opportunity intelligence.")
+    else:
+        card(
+            f"**{value(top, 'Asset')}**\n\n"
+            f"Buyer: {value(top, 'Primary Buyer')}\n\n"
+            f"Use Case: {value(top, 'Primary Use Case')}\n\n"
+            f"Collection: {value(top, 'Recommended Collection')}\n\n"
+            f"Why now: {value(top, 'Reasoning')}"
+        )
+
+    st.markdown("### Next Action")
+    st.success("Open Production Studio and generate Image 01 - Premium Contemporary Pharmacy.")
+    st.button("Go make the next image prompt", type="primary")
+
+
+def strategy_room(opportunities: pd.DataFrame) -> None:
+    header("Strategy Room", "Decide what the studio should create next.")
+    top = first_row(opportunities)
+    character_card(
+        "Strategy Director",
+        "Opportunity strategist",
+        "Ranks commercial opportunities before any production work begins.",
+        f"{value(top, 'Opportunity')} should be created next because it has the strongest score and buyer fit."
+        if top is not None
+        else "Waiting for opportunity ranking data.",
+    )
+
     if opportunities.empty:
         st.warning("Run `python src/main.py` to generate opportunity ranking data.")
         return
 
-    top = opportunities.iloc[0]
+    st.subheader("Top 10 Opportunity Ranking")
+    st.dataframe(
+        opportunities[
+            [
+                "Rank",
+                "Opportunity",
+                "Primary Buyer",
+                "Primary Use Case",
+                "Recommended Collection",
+                "Overall Score",
+                "Recommendation",
+            ]
+        ].head(10),
+        use_container_width=True,
+        hide_index=True,
+    )
+
+    st.subheader("Why This Should Be Created Next")
+    card(
+        f"Buyer: **{value(top, 'Primary Buyer')}**\n\n"
+        f"Use Case: **{value(top, 'Primary Use Case')}**\n\n"
+        f"Recommended Collection: **{value(top, 'Recommended Collection')}**\n\n"
+        f"Reasoning: {value(top, 'Reasoning')}"
+    )
+
+
+def art_department(creative_directions: pd.DataFrame) -> None:
+    header("Art Department", "Translate the collection into visual direction.")
+    current = creative_directions[
+        creative_directions.get("asset", pd.Series(dtype=str)) == "Pharmacy Product Display"
+    ].head(10)
+    first = first_row(current)
+
+    character_card(
+        "Art Director",
+        "Visual quality lead",
+        "Protects scene structure, realism, copy space, and commercial quality.",
+        "Use distinct pharmacy scenes while preserving packaging presentation utility.",
+    )
+
+    st.subheader("Current Collection")
+    st.write("**Pharmacy Product Display**")
+
+    if current.empty:
+        st.warning("Run `python src/main.py` to generate creative directions.")
+        return
+
+    selected_version = st.selectbox("Creative direction", current["Version"].tolist())
+    row = current[current["Version"] == selected_version].iloc[0]
+
     left, right = st.columns([2, 1])
     with left:
-        st.subheader("Top Opportunities")
-        st.dataframe(
-            opportunities[
-                [
-                    "Rank",
-                    "Opportunity",
-                    "Primary Buyer",
-                    "Primary Use Case",
-                    "Overall Score",
-                    "Recommendation",
-                ]
-            ].head(10),
-            use_container_width=True,
-            hide_index=True,
-        )
-
+        st.subheader("Creative Direction Summary")
+        facts = {
+            "Scene": value(row, "scene"),
+            "Architecture": value(row, "architecture"),
+            "Materials": value(row, "materials"),
+            "Lighting": value(row, "lighting"),
+            "Camera": value(row, "camera"),
+            "Copy Space": value(row, "copy_space"),
+        }
+        for label, content in facts.items():
+            st.markdown(f"**{label}:** {content}")
     with right:
-        st.subheader("Recommended Next Collection")
-        st.metric("Overall Score", int(top["Overall Score"]))
-        st.write(f"**Collection:** {top['Recommended Collection']}")
-        st.write(f"**Buyer:** {top['Primary Buyer']}")
-        st.write(f"**Use Case:** {top['Primary Use Case']}")
-        st.write(top["Reasoning"])
-
-    st.subheader("Production Prompts")
-    if production_files:
-        for path in production_files:
-            st.write(f"- `{path.relative_to(ROOT)}`")
-    else:
-        st.info("No production prompt files found yet.")
-
-    office_character_cards(opportunities, production_files)
-    audit_placeholder()
+        st.subheader("Quality Checklist")
+        st.checkbox("Clear product placement zone", value=True)
+        st.checkbox("Strong copy space", value=True)
+        st.checkbox("Realistic materials and lighting", value=True)
+        st.checkbox("No logos or readable labels", value=True)
+        st.checkbox("Distinct from other scene versions", value=True)
 
 
-def production_room(production_files: list[Path], prompt_status: pd.DataFrame) -> None:
-    st.header("Production Room")
-    if not production_files:
-        st.warning("Run `python src/main.py` to generate production prompt files.")
+def production_studio(prompts: list[dict[str, str]], status: pd.DataFrame) -> None:
+    header("Production Studio", "Generate the next image prompt one at a time.")
+    character_card(
+        "Production Assistant",
+        "Prompt operator",
+        "Queues ready-to-copy prompts and tracks production status.",
+        "Start with Image 01, then work through the collection in order.",
+    )
+
+    if not prompts:
+        st.warning("Run `python src/main.py` to generate production prompts.")
         return
 
-    selected_path = st.selectbox(
-        "Select collection",
-        production_files,
-        format_func=lambda path: path.stem,
+    completed = sum(1 for prompt in prompts if status_for(status, prompt["key"]) != "Todo")
+    st.progress(completed / len(prompts), text=f"{completed}/{len(prompts)} completed")
+
+    selected_title = st.selectbox("Select image", [prompt["title"] for prompt in prompts])
+    selected = next(prompt for prompt in prompts if prompt["title"] == selected_title)
+
+    left, right = st.columns([2, 1])
+    with left:
+        st.subheader(selected["title"])
+        st.text_area("Ready-to-copy prompt", selected["prompt"], height=300)
+        st.code(selected["prompt"], language="text")
+    with right:
+        current_status = status_for(status, selected["key"])
+        new_status = st.selectbox(
+            "Status",
+            STATUS_OPTIONS,
+            index=STATUS_OPTIONS.index(current_status),
+        )
+        if st.button("Save prompt status", type="primary"):
+            save_status(status, selected, new_status)
+            st.success("Prompt status saved.")
+        st.markdown(f"**Intended Use:** {selected['intended_use']}")
+        st.markdown(f"**Notes:** {selected['notes']}")
+
+
+def qa_room() -> None:
+    header("QA Room", "Score generated images before selecting or uploading.")
+    character_card(
+        "Quality Inspector",
+        "Image evaluator",
+        "Checks commercial value, copy space, composition, realism, and Adobe risk.",
+        "Score each generated candidate before moving it to Selected.",
     )
-    sections = parse_prompt_file(selected_path)
-    st.caption(str(selected_path.relative_to(ROOT)))
 
-    if not sections:
-        st.warning("No image prompts found in this collection file.")
-        return
-
-    prompt_labels = [section["title"] for section in sections]
-    selected_label = st.selectbox("Select image prompt", prompt_labels)
-    selected = next(section for section in sections if section["title"] == selected_label)
-
-    st.subheader(selected["title"])
-    st.text_area("Copy prompt", selected["prompt"], height=260)
-    st.code(selected["prompt"], language="text")
-    st.write(f"**Intended Use:** {selected['intended_use']}")
-    st.write(f"**Notes:** {selected['notes']}")
-
-    prompt_key = f"{selected_path.stem}:{selected['title']}"
-    current_status = status_for(prompt_status, prompt_key)
-    new_status = st.selectbox(
-        "Prompt status",
-        ["Todo", "Generated", "Selected", "Uploaded"],
-        index=["Todo", "Generated", "Selected", "Uploaded"].index(current_status),
-    )
-    if st.button("Save status"):
-        save_status(prompt_status, prompt_key, selected_path.stem, selected["title"], new_status)
-        st.success("Status saved.")
-
-
-def office_characters(opportunities: pd.DataFrame, production_files: list[Path]) -> None:
-    st.header("Office Characters")
-    office_character_cards(opportunities, production_files)
-
-
-def office_character_cards(opportunities: pd.DataFrame, production_files: list[Path]) -> None:
-    top = opportunities.iloc[0] if not opportunities.empty else None
-    next_prompt = first_prompt(production_files)
-
-    cols = st.columns(4)
-    with cols[0]:
-        st.subheader("Strategy Director")
-        if top is not None:
-            st.write(f"Top opportunity: **{top['Opportunity']}**")
-            st.write(top["Reasoning"])
-        else:
-            st.write("Waiting for opportunity ranking data.")
-
-    with cols[1]:
-        st.subheader("Art Director")
-        st.write("Quality checklist:")
-        st.write("- clear product zone")
-        st.write("- strong copy space")
-        st.write("- realistic materials")
-        st.write("- no logos or readable labels")
-
-    with cols[2]:
-        st.subheader("Production Assistant")
-        if next_prompt:
-            st.write(next_prompt["title"])
-            st.text_area("Next prompt", next_prompt["prompt"], height=180, key="assistant_next_prompt")
-        else:
-            st.write("No prompt queued yet.")
-
-    with cols[3]:
-        st.subheader("Metadata Assistant")
-        st.write("Placeholder for future titles, descriptions, and keywords.")
-
-
-def audit_room() -> None:
-    st.header("Audit Room")
-    audit_placeholder()
-
-
-def audit_placeholder() -> None:
-    st.subheader("Audit Placeholder")
     columns = [
         "image_id",
         "prompt_version",
@@ -181,7 +243,82 @@ def audit_placeholder() -> None:
         "final_score",
         "notes",
     ]
+    st.caption("editable audit table placeholder")
     st.data_editor(pd.DataFrame(columns=columns), use_container_width=True, num_rows="dynamic")
+
+
+def upload_center(opportunities: pd.DataFrame) -> None:
+    header("Upload Center", "Prepare metadata and file readiness checks.")
+    top = first_row(opportunities)
+    character_card(
+        "Metadata Assistant",
+        "Upload preparation",
+        "Prepares titles, descriptions, keywords, and readiness checks.",
+        "Metadata generation is a placeholder until the next milestone.",
+    )
+
+    st.subheader("Metadata Placeholders")
+    st.text_input("Title", value=f"{value(top, 'Asset', 'Production Image')} Commercial Marketing Background")
+    st.text_area(
+        "Description",
+        value=(
+            f"Commercial stock image for {value(top, 'Primary Use Case', 'marketing use')}, "
+            f"designed for {value(top, 'Primary Buyer', 'commercial buyers')}."
+        ),
+        height=100,
+    )
+    st.text_area("Keywords", value="pharmacy, healthcare, product, packaging, marketing, retail, copyspace")
+
+    st.subheader("File Readiness Checklist")
+    st.checkbox("Final image selected")
+    st.checkbox("No logos or readable text")
+    st.checkbox("Commercial value confirmed")
+    st.checkbox("Metadata reviewed")
+    st.checkbox("Ready for Adobe Stock upload")
+
+
+def portfolio_room() -> None:
+    header("Portfolio Room", "Track portfolio health until real analytics are connected.")
+    character_card(
+        "Portfolio Manager",
+        "Performance tracker",
+        "Summarizes approved assets, downloads, revenue, and category performance.",
+        "Portfolio metrics are placeholders until tracking data exists.",
+    )
+
+    cols = st.columns(6)
+    cols[0].metric("Total images", 0)
+    cols[1].metric("Approved", 0)
+    cols[2].metric("Rejected", 0)
+    cols[3].metric("Downloads", 0)
+    cols[4].metric("Revenue", "$0")
+    cols[5].metric("Best category", "Healthcare")
+
+    st.info("Portfolio tracking will be connected in a future milestone.")
+
+
+def header(room_name: str, caption: str) -> None:
+    st.title(room_name)
+    st.caption(caption)
+
+
+def character_card(name: str, role: str, helps_with: str, recommendation: str) -> None:
+    st.markdown(
+        f"""
+        <div class="studio-card character-card">
+          <div class="character-name">{name}</div>
+          <div class="character-role">{role}</div>
+          <p>{helps_with}</p>
+          <strong>Current recommendation</strong>
+          <p>{recommendation}</p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+def card(markdown_text: str) -> None:
+    st.markdown(f'<div class="studio-card">{markdown_text}</div>', unsafe_allow_html=True)
 
 
 def load_table(path: Path) -> pd.DataFrame:
@@ -195,23 +332,15 @@ def load_status() -> pd.DataFrame:
         return pd.DataFrame(columns=["prompt_key", "collection", "prompt_version", "status"])
     status = pd.read_csv(STATUS_CSV).fillna("")
     if "prompt_key" not in status.columns:
-        status["prompt_key"] = status["collection"] + ":" + status["version"]
-    if "prompt_version" not in status.columns and "version" in status.columns:
-        status["prompt_version"] = status["version"]
+        status["prompt_key"] = status.get("collection", "") + ":" + status.get("version", "")
     return status
 
 
-def save_status(
-    status: pd.DataFrame,
-    prompt_key: str,
-    collection: str,
-    prompt_version: str,
-    new_status: str,
-) -> None:
+def save_status(status: pd.DataFrame, prompt: dict[str, str], new_status: str) -> None:
     updated = status.copy()
     if "prompt_key" not in updated.columns:
         updated["prompt_key"] = ""
-    match = updated["prompt_key"] == prompt_key
+    match = updated["prompt_key"] == prompt["key"]
     if match.any():
         updated.loc[match, "status"] = new_status
     else:
@@ -221,9 +350,9 @@ def save_status(
                 pd.DataFrame(
                     [
                         {
-                            "prompt_key": prompt_key,
-                            "collection": collection,
-                            "prompt_version": prompt_version,
+                            "prompt_key": prompt["key"],
+                            "collection": "Pharmacy Product Display",
+                            "prompt_version": prompt["title"],
                             "status": new_status,
                         }
                     ]
@@ -241,41 +370,99 @@ def status_for(status: pd.DataFrame, prompt_key: str) -> str:
     matched = status[status["prompt_key"] == prompt_key]
     if matched.empty:
         return "Todo"
-    value = str(matched.iloc[0].get("status") or "Todo")
-    return value if value in {"Todo", "Generated", "Selected", "Uploaded"} else "Todo"
+    result = str(matched.iloc[0].get("status") or "Todo")
+    return result if result in STATUS_OPTIONS else "Todo"
 
 
 def parse_prompt_file(path: Path) -> list[dict[str, str]]:
+    if not path.exists():
+        return []
     text = path.read_text(encoding="utf-8")
-    sections = []
+    prompts = []
     for block in text.split("\n## Image ")[1:]:
         title_line, _, remainder = block.partition("\n")
         title = f"Image {title_line.strip()}"
         prompt = extract_between(remainder, "### Production Prompt", "### Intended Use")
         intended_use = extract_between(remainder, "### Intended Use", "### Notes")
         notes = extract_between(remainder, "### Notes", "---")
-        sections.append(
+        prompts.append(
             {
+                "key": f"Pharmacy Product Display:{title}",
                 "title": title,
                 "prompt": prompt.strip(),
                 "intended_use": intended_use.strip(),
                 "notes": notes.strip(),
             }
         )
-    return sections
-
-
-def first_prompt(production_files: list[Path]) -> dict[str, str] | None:
-    if not production_files:
-        return None
-    sections = parse_prompt_file(production_files[0])
-    return sections[0] if sections else None
+    return prompts
 
 
 def extract_between(text: str, start: str, end: str) -> str:
     _, _, after_start = text.partition(start)
     before_end, _, _ = after_start.partition(end)
     return before_end.strip()
+
+
+def first_row(dataframe: pd.DataFrame) -> pd.Series | None:
+    if dataframe.empty:
+        return None
+    return dataframe.iloc[0]
+
+
+def value(row: pd.Series | None, column: str, default: object = "") -> object:
+    if row is None:
+        return default
+    result = row.get(column, default)
+    if pd.isna(result):
+        return default
+    return result
+
+
+def status_count(status: pd.DataFrame, status_name: str) -> int:
+    if status.empty or "status" not in status.columns:
+        return 0
+    return int((status["status"] == status_name).sum())
+
+
+def apply_studio_style() -> None:
+    st.markdown(
+        """
+        <style>
+        .stApp {
+            background: #111316;
+            color: #f4f1ea;
+        }
+        [data-testid="stSidebar"] {
+            background: #181b20;
+            border-right: 1px solid #2b3038;
+        }
+        h1, h2, h3 {
+            color: #f7f3ea;
+        }
+        .studio-card {
+            background: #1d2229;
+            border: 1px solid #303844;
+            border-radius: 8px;
+            padding: 18px;
+            margin: 12px 0;
+            color: #f4f1ea;
+        }
+        .character-card {
+            border-left: 4px solid #d6a84f;
+        }
+        .character-name {
+            font-size: 1.15rem;
+            font-weight: 700;
+        }
+        .character-role {
+            color: #d6a84f;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
 
 
 if __name__ == "__main__":
