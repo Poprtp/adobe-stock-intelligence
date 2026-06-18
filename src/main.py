@@ -16,7 +16,20 @@ from config import (
     COMPOSITION_DNA_CSV,
     CREATIVE_DIRECTIONS_REPORT,
     CREATIVE_DIRECTIONS_WORKBOOK,
+    DOCS_DIR,
+    GOLD_STANDARD_DIR,
     INPUT_WORKBOOK,
+    INTERNAL_CREATIVE_DIRECTIONS_REPORT,
+    INTERNAL_CREATIVE_DIRECTIONS_WORKBOOK,
+    INTERNAL_DESIGN_BRIEFS_REPORT,
+    INTERNAL_DESIGN_BRIEFS_WORKBOOK,
+    INTERNAL_KNOWLEDGE_REPORT,
+    INTERNAL_KNOWLEDGE_WORKBOOK,
+    INTERNAL_OPPORTUNITY_RANKING_REPORT,
+    INTERNAL_OPPORTUNITY_RANKING_WORKBOOK,
+    INTERNAL_OUTPUT_DIR,
+    INTERNAL_PROMPT_VARIATIONS_REPORT,
+    INTERNAL_PROMPT_VARIATIONS_WORKBOOK,
     KNOWLEDGE_REPORT,
     KNOWLEDGE_WORKBOOK,
     MARKET_SCORE_CSV,
@@ -32,6 +45,14 @@ from config import (
     OPPORTUNITY_RANKING_REPORT,
     OPPORTUNITIES_CSV,
     OUTPUT_WORKBOOK,
+    PORTFOLIO_DIR,
+    PRODUCTION_COLLECTIONS_DIR,
+    PRODUCTION_DIR,
+    PRODUCTION_GENERATED_DIR,
+    PRODUCTION_PROMPTS_DIR,
+    PRODUCTION_SELECTED_DIR,
+    PRODUCTION_STATUS_CSV,
+    PRODUCTION_UPLOAD_DIR,
     SUMMARY_REPORT,
     USE_CASE_DATABASE_CSV,
     USE_CASES_CSV,
@@ -54,6 +75,7 @@ from opportunity_engine import (
     rank_opportunities,
     write_opportunity_outputs,
 )
+from production_prompt_engine import ensure_workspace_dirs, write_production_prompt_files
 from knowledge_engine import (
     KnowledgePaths,
     build_opportunity_map,
@@ -80,8 +102,23 @@ def load_niche_database() -> pd.DataFrame:
         raise RuntimeError(f"Unable to read input workbook: {INPUT_WORKBOOK}") from exc
 
 
-def run_pipeline() -> tuple[int, int, int, int, int, int, int, int]:
+def run_pipeline() -> tuple[int, int, int, int, int, int, int, int, int]:
     """Run the full scoring, reporting, and knowledge-layer pipeline."""
+
+    ensure_workspace_dirs(
+        [
+            INTERNAL_OUTPUT_DIR,
+            PRODUCTION_DIR,
+            PRODUCTION_COLLECTIONS_DIR,
+            PRODUCTION_PROMPTS_DIR,
+            PRODUCTION_GENERATED_DIR,
+            PRODUCTION_SELECTED_DIR,
+            PRODUCTION_UPLOAD_DIR,
+            GOLD_STANDARD_DIR,
+            PORTFOLIO_DIR,
+            DOCS_DIR,
+        ]
+    )
 
     niche_data = load_niche_database()
     valid_niche_rows = len(clean_niche_rows(niche_data))
@@ -105,6 +142,11 @@ def run_pipeline() -> tuple[int, int, int, int, int, int, int, int]:
         OUTPUT_WORKBOOK,
         OPPORTUNITY_RANKING_REPORT,
     )
+    write_opportunity_outputs(
+        ranked_opportunities,
+        INTERNAL_OPPORTUNITY_RANKING_WORKBOOK,
+        INTERNAL_OPPORTUNITY_RANKING_REPORT,
+    )
 
     knowledge_base = load_knowledge_base(
         KnowledgePaths(
@@ -117,9 +159,20 @@ def run_pipeline() -> tuple[int, int, int, int, int, int, int, int]:
     ranked_assets = rank_assets(knowledge_base["assets"])
     opportunity_map = build_opportunity_map(knowledge_base)
     write_knowledge_outputs(ranked_assets, opportunity_map, KNOWLEDGE_WORKBOOK, KNOWLEDGE_REPORT)
+    write_knowledge_outputs(
+        ranked_assets,
+        opportunity_map,
+        INTERNAL_KNOWLEDGE_WORKBOOK,
+        INTERNAL_KNOWLEDGE_REPORT,
+    )
 
     design_briefs = generate_design_briefs(opportunity_map, max_briefs=10)
     write_design_brief_outputs(design_briefs, DESIGN_BRIEFS_WORKBOOK, DESIGN_BRIEFS_REPORT)
+    write_design_brief_outputs(
+        design_briefs,
+        INTERNAL_DESIGN_BRIEFS_WORKBOOK,
+        INTERNAL_DESIGN_BRIEFS_REPORT,
+    )
 
     dna_libraries = load_dna_libraries(
         DNAPaths(
@@ -138,12 +191,29 @@ def run_pipeline() -> tuple[int, int, int, int, int, int, int, int]:
         CREATIVE_DIRECTIONS_WORKBOOK,
         CREATIVE_DIRECTIONS_REPORT,
     )
+    write_creative_direction_outputs(
+        creative_directions,
+        INTERNAL_CREATIVE_DIRECTIONS_WORKBOOK,
+        INTERNAL_CREATIVE_DIRECTIONS_REPORT,
+    )
 
     prompt_variations = generate_prompt_variations(creative_directions)
     write_prompt_variation_outputs(
         prompt_variations,
         PROMPT_VARIATIONS_WORKBOOK,
         PROMPT_VARIATIONS_REPORT,
+    )
+    write_prompt_variation_outputs(
+        prompt_variations,
+        INTERNAL_PROMPT_VARIATIONS_WORKBOOK,
+        INTERNAL_PROMPT_VARIATIONS_REPORT,
+    )
+
+    production_collections = write_production_prompt_files(
+        ranked_opportunities,
+        prompt_variations,
+        PRODUCTION_PROMPTS_DIR,
+        PRODUCTION_STATUS_CSV,
     )
 
     return (
@@ -155,6 +225,7 @@ def run_pipeline() -> tuple[int, int, int, int, int, int, int, int]:
         len(design_briefs),
         len(creative_directions),
         len(prompt_variations),
+        len(production_collections),
     )
 
 
@@ -169,6 +240,7 @@ def main() -> int:
             design_brief_rows,
             creative_direction_rows,
             prompt_rows,
+            production_collection_rows,
         ) = run_pipeline()
     except (FileNotFoundError, ValueError, RuntimeError, ScoringError) as exc:
         print(f"Pipeline failed: {exc}", file=sys.stderr)
@@ -184,7 +256,8 @@ def main() -> int:
         f"design brief rows={design_brief_rows}, "
         f"creative direction rows={creative_direction_rows}, "
         f"prompt variation rows={prompt_rows}, "
-        f"wrote {OUTPUT_WORKBOOK}, {OPPORTUNITY_RANKING_REPORT}, {SUMMARY_REPORT}, {KNOWLEDGE_WORKBOOK}, {KNOWLEDGE_REPORT}, {DESIGN_BRIEFS_WORKBOOK}, {DESIGN_BRIEFS_REPORT}, {CREATIVE_DIRECTIONS_WORKBOOK}, {CREATIVE_DIRECTIONS_REPORT}, {PROMPT_VARIATIONS_WORKBOOK}, and {PROMPT_VARIATIONS_REPORT}."
+        f"production collections={production_collection_rows}, "
+        f"wrote {OUTPUT_WORKBOOK}, {OPPORTUNITY_RANKING_REPORT}, {INTERNAL_OUTPUT_DIR}, {PRODUCTION_PROMPTS_DIR}, and production workspace folders."
     )
     return 0
 

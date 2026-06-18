@@ -39,6 +39,12 @@ From the project root:
 python src/main.py
 ```
 
+Open the local production workspace app:
+
+```powershell
+streamlit run app.py
+```
+
 ## Expected Files
 
 Input workbook:
@@ -80,6 +86,10 @@ Generated outputs:
 - `output/creative_directions.md`
 - `output/prompt_variations.xlsx`
 - `output/prompt_variations.md`
+- `internal_output/opportunity_ranking.md`
+- `internal_output/creative_directions.md`
+- `internal_output/prompt_variations.md`
+- `production/02_Production_Prompts/Healthcare/Pharmacy Product Display.md`
 
 ## Scoring Logic
 
@@ -194,6 +204,24 @@ Prompt rules:
 - preserve the same Buyer and Use Case
 - keep Adobe Stock commercial quality
 - no image generation and no image APIs
+
+## Production Workspace
+
+Milestone M7.5 separates system outputs from producer-facing workflow files:
+
+- `internal_output/` stores system and developer outputs.
+- `production/01_Collections/` stores collection planning.
+- `production/02_Production_Prompts/` stores ready-to-copy collection prompt files.
+- `production/03_Generated/` stores generated image candidates.
+- `production/04_Selected/` stores selected images.
+- `production/05_Upload/` stores upload-ready assets.
+
+The Streamlit MVP in `app.py` includes:
+
+- Dashboard
+- Production Room
+- Office Characters panel
+- Audit Room placeholder
 
 ## Phase 3 TODO
 

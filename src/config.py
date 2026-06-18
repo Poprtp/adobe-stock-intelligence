@@ -9,6 +9,16 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 
 DATA_DIR = PROJECT_ROOT / "data"
 OUTPUT_DIR = PROJECT_ROOT / "output"
+INTERNAL_OUTPUT_DIR = PROJECT_ROOT / "internal_output"
+PRODUCTION_DIR = PROJECT_ROOT / "production"
+PRODUCTION_COLLECTIONS_DIR = PRODUCTION_DIR / "01_Collections"
+PRODUCTION_PROMPTS_DIR = PRODUCTION_DIR / "02_Production_Prompts"
+PRODUCTION_GENERATED_DIR = PRODUCTION_DIR / "03_Generated"
+PRODUCTION_SELECTED_DIR = PRODUCTION_DIR / "04_Selected"
+PRODUCTION_UPLOAD_DIR = PRODUCTION_DIR / "05_Upload"
+GOLD_STANDARD_DIR = PROJECT_ROOT / "gold_standard"
+PORTFOLIO_DIR = PROJECT_ROOT / "portfolio"
+DOCS_DIR = PROJECT_ROOT / "docs"
 
 INPUT_WORKBOOK = DATA_DIR / "Adobe_Stock_Intelligence_Database_v2.xlsx"
 NICHE_SHEET_NAME = "Niche Database"
@@ -16,6 +26,9 @@ NICHE_SHEET_NAME = "Niche Database"
 OUTPUT_WORKBOOK = OUTPUT_DIR / "opportunity_ranking.xlsx"
 OPPORTUNITY_RANKING_REPORT = OUTPUT_DIR / "opportunity_ranking.md"
 SUMMARY_REPORT = OUTPUT_DIR / "summary_report.md"
+INTERNAL_OPPORTUNITY_RANKING_WORKBOOK = INTERNAL_OUTPUT_DIR / "opportunity_ranking.xlsx"
+INTERNAL_OPPORTUNITY_RANKING_REPORT = INTERNAL_OUTPUT_DIR / "opportunity_ranking.md"
+PRODUCTION_STATUS_CSV = PRODUCTION_DIR / "prompt_status.csv"
 
 # Knowledge layer inputs
 KNOWLEDGE_DIR = PROJECT_ROOT / "knowledge"
@@ -42,10 +55,14 @@ COMMERCIAL_DNA_CSV = KNOWLEDGE_DIR / "commercial_dna.csv"
 
 KNOWLEDGE_WORKBOOK = OUTPUT_DIR / "knowledge_ranking.xlsx"
 KNOWLEDGE_REPORT = OUTPUT_DIR / "knowledge_summary.md"
+INTERNAL_KNOWLEDGE_WORKBOOK = INTERNAL_OUTPUT_DIR / "knowledge_ranking.xlsx"
+INTERNAL_KNOWLEDGE_REPORT = INTERNAL_OUTPUT_DIR / "knowledge_summary.md"
 
 # Design brief outputs
 DESIGN_BRIEFS_WORKBOOK = OUTPUT_DIR / "design_briefs.xlsx"
 DESIGN_BRIEFS_REPORT = OUTPUT_DIR / "design_briefs.md"
+INTERNAL_DESIGN_BRIEFS_WORKBOOK = INTERNAL_OUTPUT_DIR / "design_briefs.xlsx"
+INTERNAL_DESIGN_BRIEFS_REPORT = INTERNAL_OUTPUT_DIR / "design_briefs.md"
 
 IDENTITY_COLUMNS = [
     "Industry",
@@ -83,3 +100,7 @@ CREATIVE_DIRECTIONS_WORKBOOK = OUTPUT_DIR / "creative_directions.xlsx"
 CREATIVE_DIRECTIONS_REPORT = OUTPUT_DIR / "creative_directions.md"
 PROMPT_VARIATIONS_WORKBOOK = OUTPUT_DIR / "prompt_variations.xlsx"
 PROMPT_VARIATIONS_REPORT = OUTPUT_DIR / "prompt_variations.md"
+INTERNAL_CREATIVE_DIRECTIONS_WORKBOOK = INTERNAL_OUTPUT_DIR / "creative_directions.xlsx"
+INTERNAL_CREATIVE_DIRECTIONS_REPORT = INTERNAL_OUTPUT_DIR / "creative_directions.md"
+INTERNAL_PROMPT_VARIATIONS_WORKBOOK = INTERNAL_OUTPUT_DIR / "prompt_variations.xlsx"
+INTERNAL_PROMPT_VARIATIONS_REPORT = INTERNAL_OUTPUT_DIR / "prompt_variations.md"
