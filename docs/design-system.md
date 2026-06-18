@@ -2,9 +2,18 @@
 
 ## Direction
 
-The interface uses a minimal monotone creative-software style inspired by Linear,
-Notion, Arc Browser, Raycast, Adobe Lightroom, and Figma. The UI should feel
-quiet, precise, and production-focused.
+Adobe Stock Studio uses a minimal monotone creative-software interface. The
+style should feel closer to Linear, Notion, Arc Browser, Raycast, Adobe
+Lightroom, and Figma than a themed analytics dashboard.
+
+Rules:
+
+- Use monochrome only.
+- Use top navigation only.
+- Do not use colorful accents.
+- Do not use gradients.
+- Do not use decorative shadows.
+- Prefer whitespace, thin borders, and restrained typography.
 
 ## Color Tokens
 
@@ -16,50 +25,85 @@ quiet, precise, and production-focused.
 - `--studio-muted`: `#a3a3a3`
 - `--studio-subtle`: `#737373`
 
-Rules:
+## Typography Scale
 
-- Use monochrome only.
-- Do not use colorful department accents.
-- Do not use gradients.
-- Do not use decorative shadows.
+- Font stack: `Inter`, `Geist`, system UI, sans-serif.
+- Prompt font stack: `JetBrains Mono`, `Cascadia Code`, monospace.
+- Page title: restrained `h1`, no oversized hero treatment.
+- Section title: compact `h2` or `h3`.
+- Small labels: uppercase, muted, used sparingly.
+- Letter spacing remains `0`.
 
-## Typography
+## Spacing System
 
-- Preferred stack: `Inter`, `Geist`, system UI, sans-serif.
-- Letter spacing stays at `0`.
-- Headings are restrained and functional.
-- Labels should be short and producer-friendly.
+- Base spacing unit: `8px`.
+- Page max width: 1440-1600px, currently `1520px`.
+- Page side padding: `40px`.
+- Cards: `20px` internal padding.
+- Section rhythm: use clear vertical spacing before headings and cards.
 
-## Spacing
+## Card Rules
 
-- Base spacing unit: `4px`.
-- Cards use `18px` padding.
-- Room sections should use clear vertical rhythm with minimal clutter.
+- Background: `--studio-surface`.
+- Border: 1px solid `--studio-border`.
+- Radius: approximately `16px`.
+- No decorative shadows.
+- Character cards must be compact and include:
+  - Assistant name
+  - Role
+  - Next recommendation
+  - Current task
 
-## Borders
-
-- Use subtle 1px borders with `--studio-border`.
-- Border radius should be 6-8px.
-- Borders replace shadows as the primary separation method.
-
-## Cards
-
-- Cards use `--studio-surface`.
-- Character cards use a subtle left border, not a color accent.
-- Cards should describe action and context, not decorate the page.
-
-## Buttons
+## Button Rules
 
 - Buttons use `--studio-surface-2`.
+- Buttons use thin neutral borders.
+- No colorful primary states.
+- Labels should be direct actions, such as `Mark Generated`, `Mark Selected`,
+  and `Next Image`.
+
+## Form Controls
+
+- Inputs and text areas use `--studio-surface`.
 - Borders use `--studio-border`.
-- Avoid colorful primary button treatments.
+- Prompt text areas use monospace typography.
+- Controls should support production workflow without visual noise.
 
-## Layout
+## Status States
 
-- Navigation is horizontal top navigation.
-- Sidebar navigation is hidden.
-- Production Studio gets extra horizontal space for ready-to-copy prompts.
-- Rooms should preserve the existing workflow:
+Prompt status values:
+
+- `Todo`
+- `Generated`
+- `Selected`
+- `Uploaded`
+
+Status indicators stay monochrome. Progress is shown with a neutral progress
+bar and text such as `0 / 10 completed`.
+
+## Empty States
+
+Empty states should tell the user the next concrete step, usually:
+
+- Run `python src/main.py`.
+- Generate production prompt files.
+- Start with Image 01.
+
+Avoid decorative empty-state illustrations.
+
+## Layout Rules
+
+- Navigation is horizontal top navigation via tabs.
+- Sidebar navigation is not used.
+- Content is centered with readable max width.
+- Production Studio uses:
+
+```text
+Image List | Prompt Workspace | Actions / Notes
+```
+
+- Prompt Workspace must be the largest area.
+- The app keeps these rooms:
   - CEO Office
   - Strategy Room
   - Art Department
