@@ -55,11 +55,13 @@ Knowledge inputs:
 - `knowledge/use_cases.csv`
 - `knowledge/assets.csv`
 - `knowledge/opportunities.csv`
-- `knowledge/scene_library.csv`
-- `knowledge/material_library.csv`
-- `knowledge/lighting_library.csv`
-- `knowledge/camera_library.csv`
-- `knowledge/composition_library.csv`
+- `knowledge/asset_dna.csv`
+- `knowledge/scene_dna.csv`
+- `knowledge/material_dna.csv`
+- `knowledge/lighting_dna.csv`
+- `knowledge/camera_dna.csv`
+- `knowledge/composition_dna.csv`
+- `knowledge/commercial_dna.csv`
 
 Generated outputs:
 
@@ -69,6 +71,8 @@ Generated outputs:
 - `output/knowledge_summary.md`
 - `output/design_briefs.xlsx`
 - `output/design_briefs.md`
+- `output/creative_directions.xlsx`
+- `output/creative_directions.md`
 - `output/prompt_variations.xlsx`
 - `output/prompt_variations.md`
 
@@ -119,24 +123,35 @@ Design briefs define:
 - avoid list
 - production priority
 
-## Commercial Prompt Engine
+## Scene DNA Variation Framework
 
-Phase 6 replaces fixed template prompt generation with modular prompt libraries.
+Phase 6.1 replaces fixed template prompt generation with a Scene DNA variation
+framework. The goal is to create distinct commercial image directions before
+writing prompts, reducing near-duplicate risk.
 
-For each asset brief, the engine creates 10 commercial prompt variations by
-combining:
+The framework uses:
 
 ```text
-Scene + Materials + Lighting + Camera + Composition + Commercial Rules
+Asset DNA + Scene DNA + Commercial DNA + Distinct Engine = Creative Direction + Prompt
 ```
 
-Generation rules:
+Core modules:
 
-- never repeat the same camera plus composition combination for an asset
-- never repeat the same material set for an asset
-- maintain the same Buyer and Use Case
+- `src/creative_direction_engine.py`
+- `src/distinct_engine.py`
+- `src/commercial_prompt_engine.py`
+
+Distinctness scoring rejects creative directions with similarity above 70% using
+weighted layers for architecture, spatial layout, lighting, materials, camera,
+props/styling, and color/mood.
+
+Prompt rules:
+
+- generate prompts from accepted creative directions
 - keep prompts between 140 and 220 words
-- preserve Adobe Stock commercial quality
+- do not mention internal scoring or database fields
+- preserve the same Buyer and Use Case
+- keep Adobe Stock commercial quality
 - no image generation and no image APIs
 
 ## Phase 3 TODO

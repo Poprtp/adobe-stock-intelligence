@@ -1,0 +1,11 @@
+composition_id,composition_name,product_zone,copy_space_position,copy_space_percentage,best_use_case
+COD001,Left Product Right Copy,left third shelf or counter,right side,45,Website Hero
+COD002,Right Product Left Copy,right third shelf or counter,left side,45,Website Hero
+COD003,Central Packaging Island,center island or shelf bay,upper third,35,Packaging Presentation
+COD004,Lower Third Counter Zone,lower foreground counter,upper left,40,Packaging Presentation
+COD005,Symmetrical Shelf Hero,center shelf bay,top center,35,Retail Pitch
+COD006,Open Atrium Product Zone,midground island display,left upper,40,Sales Deck
+COD007,Diagonal Shelf Lead,front shelf corner,upper right,35,Retail Pitch
+COD008,Vertical Social Product Zone,center lower half,top third,30,Packaging Presentation
+COD009,Counter Hero Negative Space,foreground counter side,opposite side,50,Website Hero
+COD010,Layered Healthcare Display,midground product plinth,clean side panel,40,Product Launch

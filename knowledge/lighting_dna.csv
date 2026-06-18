@@ -1,0 +1,11 @@
+lighting_id,lighting_name,contrast,mood,best_use_case,avoid_with
+LD001,Soft Clinical Daylight,low contrast,bright trustworthy healthcare,Website Hero,"dark luxury, harsh shadows"
+LD002,Premium Retail Softbox,medium-low contrast,polished product launch,Packaging Presentation,"clinical glare, moody nightclub"
+LD003,Scandinavian Window Light,low contrast,warm minimal calm,Website Hero,"cold data center glow"
+LD004,Japanese Ambient Glow,low contrast,serene precise minimal,Product Launch,"hard industrial light"
+LD005,Wellness Retail Illumination,low contrast,approachable healthy retail,Packaging Presentation,"freezer case blue"
+LD006,Crisp Clinical Overhead,medium contrast,clean regulated clarity,Sales Deck,"warm rustic shadows"
+LD007,Natural Apothecary Daylight,medium-low contrast,warm natural trust,Website Hero,"sci-fi blue glow"
+LD008,Architectural Atrium Light,medium contrast,spacious premium credibility,Sales Deck,"small cluttered retail"
+LD009,Island Display Highlight,medium contrast,focused retail merchandising,Retail Pitch,"dramatic spotlight"
+LD010,Counter Hero Fill Light,medium-low contrast,direct product-ready clarity,Packaging Presentation,"backlit silhouette"

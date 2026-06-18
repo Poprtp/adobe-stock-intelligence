@@ -1,0 +1,11 @@
+commercial_id,objective,buyer,use_case,output_format,required_rules
+CMD001,Packaging credibility for OTC and supplement products,Pharmaceutical Brand Manager,Packaging Presentation,stock image prompt,"no text; no logos; no readable labels; packaging-ready zone; clean healthcare retail context"
+CMD002,Premium launch scene for regulated healthcare products,Pharmaceutical Brand Manager,Product Launch,stock image prompt,"no text; no logos; no claims; premium product zone; realistic materials"
+CMD003,Healthcare website hero with copy space,Healthcare Marketing Manager,Website Hero,stock image prompt,"no text; no logos; no people; 45 percent copy space; broad healthcare usability"
+CMD004,Retail pitch visual for supplement shelf placement,Supplement Brand Manager,Retail Pitch,stock image prompt,"no text; no logos; no brand marks; organized shelf rhythm; blank packaging facings"
+CMD005,B2B sales deck product placement environment,Medical Device Brand Manager,Sales Deck,stock image prompt,"no text; no logos; no clinical claims; presentation-ready negative space"
+CMD006,Wellness packaging display with pharmacy trust,Wellness Brand Manager,Packaging Presentation,stock image prompt,"no text; no logos; no hands; warm healthcare retail; clean product display"
+CMD007,Natural health website hero,Natural Health Brand Manager,Website Hero,stock image prompt,"no text; no logos; no clutter; natural materials; unbranded packaging zones"
+CMD008,Minimal regulated healthcare product launch,Healthcare Marketing Manager,Product Launch,stock image prompt,"no text; no logos; no people; precise minimal scene; strong product zone"
+CMD009,Pharmacy chain landing page hero,Pharmacy Chain Marketing Manager,Website Hero,stock image prompt,"no text; no logos; no readable labels; pharmacy counter; hero copy space"
+CMD010,Healthcare retail presentation environment,Healthcare Marketing Manager,Sales Deck,stock image prompt,"no text; no logos; no unrelated retail categories; premium architectural retail"

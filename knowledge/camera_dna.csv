@@ -1,0 +1,11 @@
+camera_id,camera_name,focal_length,angle,best_use_case,copy_space_support
+CD001,Eye Level Retail Hero,35mm,eye-level straight-on,Packaging Presentation,strong horizontal copy space
+CD002,Three Quarter Counter View,40mm,slight three-quarter angle,Packaging Presentation,balanced side copy space
+CD003,Wide Website Hero,28mm,wide corrected interior view,Website Hero,large left or right copy zone
+CD004,Premium Product Shelf Frame,50mm,eye-level shelf detail,Retail Pitch,moderate upper copy space
+CD005,Architectural Atrium View,24mm,tilt-corrected wide angle,Sales Deck,broad negative space
+CD006,Counter Level Product Hero,45mm,low counter-height angle,Product Launch,clean foreground copy area
+CD007,Symmetrical Pharmacy Bay,35mm,centered symmetrical view,Website Hero,balanced top copy space
+CD008,Vertical Packaging Crop,55mm,vertical product-marketing angle,Packaging Presentation,side copy margin
+CD009,Over Counter Presentation,50mm,slight downward counter view,Sales Deck,clean slide copy zone
+CD010,Open Foreground Hero,32mm,wide frame with open foreground,Website Hero,large foreground overlay area

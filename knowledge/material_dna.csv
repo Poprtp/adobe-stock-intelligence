@@ -1,0 +1,11 @@
+material_id,material_set_name,primary_materials,finish,mood,best_industries,avoid_with
+MD001,White Laminate And Clear Glass,matte white laminate; clear glass shelves; brushed aluminum rails; pale ceramic tile,matte and low-glare,clean clinical trust,Healthcare,"pet, rustic warehouse"
+MD002,Stone Counter And Satin Metal,pale stone counter; satin aluminum trim; frosted glass; soft grey panels,satin polished premium,upscale pharmaceutical,Healthcare,"industrial workshop, pet aisle"
+MD003,Pale Oak Healthcare Retail,pale oak veneer; white acrylic shelving; linen acoustic panels; warm grey floor,natural matte,warm minimal wellness,Healthcare,"data center, frozen food"
+MD004,Minimal White Acrylic,white acrylic blocks; seamless solid surface; translucent shelf dividers; light grey rubber floor,seamless matte,precise regulated clean,Healthcare,"rustic apothecary, pet textures"
+MD005,Soft Beige Pharmacy Set,warm neutral wall panels; cream laminate shelves; brushed nickel; muted terrazzo floor,soft matte,approachable healthcare,Healthcare,"industrial metal, freezer glass"
+MD006,Natural Apothecary Wood,refined walnut shelving; unlabeled amber glass; matte paperboard boxes; pale stone counter,natural satin,natural premium trust,Healthcare,"data center, supermarket freezer"
+MD007,Clinical Glass And Tile,tempered glass shelving; white tile; stainless edge strips; matte white counter,clean reflective,clinical clarity,Healthcare,"pet, coffee roastery"
+MD008,Architectural Healthcare Stone,large format stone; low-iron glass; soft acoustic ceiling; matte metal fixtures,premium low sheen,architectural calm,Healthcare,"warehouse, restaurant kitchen"
+MD009,Modular Pharmacy Shelving,white modular shelf system; satin shelf rails; blank paperboard facings; grey vinyl floor,retail matte,organized pharmacy merchandising,Healthcare,"pet toys, data racks"
+MD010,Counter Hero Materials,solid surface counter; frosted acrylic risers; brushed aluminum; soft white cabinetry,polished matte mix,professional product hero,Healthcare,"frozen food, industrial tools"
